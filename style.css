@@ -1,0 +1,840 @@
+/* ==========================================================================
+   ១. ការកំណត់ទូទៅ និងអថេរពណ៌ (GLOBAL STYLES & CSS VARIABLES)
+   ========================================================================== */
+:root { /* កន្លែងផ្ទុកអថេរពណ៌ (Variables) ដើម្បីងាយស្រួលហៅមកប្រើ និងកែប្រែរួមគ្នា */
+    --bg-dark: #110b0c;           /* ពណ៌ផ្ទៃខាងក្រោយងងឹតចម្បង */
+    --bg-secondary: #1a0f12;      /* ពណ៌ផ្ទៃខាងក្រោយសម្រាប់ផ្នែក About និងផ្នែកបន្ទាប់ */
+    --card-bg: #261215;           /* ពណ៌ផ្ទៃខាងក្រោយនៃកាតនីមួយៗ */
+    --primary-red: #f12711;       /* ពណ៌ក្រហមចម្បងសម្រាប់ប៊ូតុង និងអក្សររំលេច */
+    --primary-hover: #d11e0a;     /* ពណ៌ក្រហមពេលដាក់ Mouse ពីលើប៊ូតុង */
+    --text-white: #ffffff;        /* ពណ៌អក្សរស */
+    --text-gray: #b0a8aa;         /* ពណ៌អក្សរប្រផេះស្រាលសម្រាប់អត្ថបទពណ៌នា */
+    --border-color: rgba(255, 255, 255, 0.08); /* ពណ៌គែមបន្ទាត់ស្រាល */
+}
+
+* { /* សញ្ញា * មានន័យថាអនុវត្តលើគ្រប់ធាតុ HTML ទាំងអស់ក្នុងគេហទំព័រ */
+    margin: 0;                    /* លុបគម្លាតខាងក្រៅដើមរបស់ Browser ឱ្យស្មើ 0 */
+    padding: 0;                   /* លុបគម្លាតខាងក្នុងដើមរបស់ Browser ឱ្យស្មើ 0 */
+    box-sizing: border-box;       /* គណនា padding និង border បញ្ចូលក្នុងទំហំ width/height សរុប */
+    font-family: 'Poppins', sans-serif; /* កំណត់ពុម្ពអក្សរ Poppins សម្រាប់គេហទំព័រទាំងមូល */
+}
+
+body {
+    background-color: var(--bg-dark); /* ដាក់ពណ៌ផ្ទៃខាងក្រោយគេហទំព័រ */
+    color: var(--text-white);         /* កំណត់ពណ៌អក្សរទូទៅជាពណ៌ស */
+    line-height: 1.6;                 /* កំណត់គម្លាតកម្ពស់បន្ទាត់អក្សរឱ្យស្រឡះងាយអាន */
+    overflow-x: hidden;               /* លាក់ផ្នែកដែលលយហួសអេក្រង់តាមទិសដេក */
+    display: flex;                    /* ប្រើ Flexbox ដើម្បីឱ្យ Footer នៅខាងក្រោមជានិច្ច */
+    flex-direction: column;           /* តម្រៀបពីលើចុះក្រោម */
+    min-height: 100vh;                /* កម្ពស់អប្បបរមាស្មើនឹង 100% នៃអេក្រង់ */
+}
+
+main {
+    flex: 1;                          /* ឱ្យផ្នែកកណ្តាលរីកពេញទំហំដែលនៅសល់ */
+}
+
+.container {
+    max-width: 1140px;            /* កំណត់ទទឹងអតិបរមារបស់ប្រអប់កណ្តាល */
+    margin: 0 auto;               /* រុញប្រអប់ឱ្យនៅចំកណ្តាលអេក្រង់ */
+    padding: 0 20px;              /* បន្ថែមគម្លាតខាងក្នុងឆ្វេង-ស្តាំ 20px */
+}
+
+/* ==========================================================================
+   ២. រចនាប៊ូតុង និងចំណងជើងរួម (REUSABLE BUTTONS & TITLES)
+   ========================================================================== */
+.btn {
+    display: inline-flex;         /* ធ្វើឱ្យប៊ូតុងរួមទំហំតាមអក្សរ និងអាចតម្រឹម Icon ខាងក្នុងបាន */
+    align-items: center;          /* តម្រឹម Icon និងអក្សរក្នុងប៊ូតុងឱ្យនៅកណ្តាលតាមទិសឈរ */
+    gap: 8px;                     /* កំណត់គម្លាតចន្លោះ Icon និងអក្សរ 8px */
+    padding: 12px 26px;           /* កំណត់គម្លាតខាងក្នុងប៊ូតុង */
+    border-radius: 50px;          /* ធ្វើឱ្យជ្រុងប៊ូតុងកោងមូលទ្រវែង */
+    text-decoration: none;        /* លុបបន្ទាត់ពីក្រោមអក្សរតំណភ្ជាប់ */
+    font-weight: 600;             /* កំណត់កម្រាស់អក្សរ */
+    font-size: 14px;              /* កំណត់ទំហំអក្សរ 14px */
+    transition: all 0.3s ease;    /* កំណត់ល្បឿនផ្លាស់ប្តូរចលនា 0.3 វិនាទី */
+    cursor: pointer;              /* ប្តូរសញ្ញា Mouse ទៅជារូបដៃ */
+    border: none;                 /* លុបស៊ុមដើមរបស់ប៊ូតុង */
+}
+
+.btn-primary {
+    background-color: var(--primary-red); /* ដាក់ពណ៌ផ្ទៃប៊ូតុងជាពណ៌ក្រហម */
+    color: var(--text-white);             /* ដាក់ពណ៌អក្សរជាពណ៌ស */
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover); /* ប្តូរពណ៌ក្រហមឱ្យក្រមៅជាងមុន */
+    transform: translateY(-2px);  /* រំកិលប៊ូតុងឱ្យហោះឡើងលើ 2px */
+}
+
+.btn-sm {
+    padding: 10px 22px;           /* បង្រួមគម្លាតខាងក្នុងប៊ូតុងឱ្យតូចជាងមុន */
+    font-size: 13px;              /* បន្ថយទំហំអក្សរមកត្រឹម 13px */
+}
+
+.btn-icon {
+    display: inline-flex;         /* បើកមុខងារ Flexbox */
+    align-items: center;          /* កណ្តាលតាមទិសឈរ */
+    justify-content: center;      /* កណ្តាលតាមទិសដេក */
+    width: 44px;                  /* ទទឹងប៊ូតុង 44px */
+    height: 44px;                 /* កម្ពស់ប៊ូតុង 44px */
+    background-color: var(--primary-red); /* ពណ៌ផ្ទៃក្រហម */
+    color: var(--text-white);     /* ពណ៌ Icon ស */
+    border-radius: 12px;          /* ជ្រុងកោង 12px */
+    text-decoration: none;        /* លុបបន្ទាត់ពីក្រោម */
+    transition: 0.3s;             /* ល្បឿនផ្លាស់ប្តូរពណ៌ */
+}
+
+.btn-icon:hover {
+    background-color: var(--primary-hover);
+}
+
+.sub-title {
+    color: var(--primary-red);    /* ពណ៌អក្សរក្រហម */
+    font-size: 13px;              /* ទំហំអក្សរ 13px */
+    font-weight: 600;             /* កម្រាស់អក្សរ */
+    letter-spacing: 1.5px;        /* គម្លាតចន្លោះតួអក្សរ */
+    text-transform: uppercase;    /* បំប្លែងជាអក្សរធំទាំងអស់ */
+    display: block;               /* ចុះបន្ទាត់ថ្មីដាច់ដោយឡែក */
+    margin-bottom: 5px;           /* គម្លាតខាងក្រោម 5px */
+}
+
+.page-header {
+    padding: 60px 0 40px;         /* គម្លាតក្បាលទំព័រនីមួយៗ */
+    text-align: center;           /* តម្រឹមអក្សរកណ្តាល */
+    background: radial-gradient(circle at 50% 20%, rgba(241, 39, 17, 0.15), transparent 60%);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.page-header h1 {
+    font-size: 40px;              /* ទំហំចំណងជើងទំព័រ */
+    font-weight: 800;
+}
+
+.page-header p {
+    color: var(--text-gray);
+    max-width: 600px;
+    margin: 10px auto 0;
+    font-size: 14px;
+}
+
+/* ==========================================================================
+   ៣. ផ្នែកក្បាលគេហទំព័រ (HEADER / NAVBAR)
+   ========================================================================== */
+.navbar {
+    padding: 25px 0;              /* គម្លាតខាងក្នុងលើ-ក្រោម 25px */
+    background-color: rgba(17, 11, 12, 0.95); /* ផ្ទៃងងឹតថ្លាបន្តិច */
+    position: sticky;             /* ឱ្យ Menu ជាប់នៅខាងលើជានិច្ចពេលអូសចុះក្រោម */
+    top: 0;                       /* ជាប់គែមខាងលើ 0px */
+    z-index: 1000;                /* ស្ថិតនៅស្រទាប់លើគេបង្អស់ */
+    border-bottom: 1px solid var(--border-color);
+}
+
+.nav-container {
+    display: flex;                /* រៀប Logo, Menu, ប៊ូតុង ឱ្យនៅជួរដេកតែមួយ */
+    justify-content: space-between; /* រុញឱ្យនៅម្ខាងម្នាក់ */
+    align-items: center;          /* តម្រឹមកណ្តាលតាមទិសឈរ */
+}
+
+.logo {
+    font-size: 24px;              /* ទំហំអក្សរ Logo */
+    font-weight: 700;             /* អក្សរដិត */
+    color: var(--text-white);     /* ពណ៌ស */
+    text-decoration: none;        /* លុបបន្ទាត់ពីក្រោម */
+}
+
+.logo span {
+    color: var(--primary-red);    /* ពណ៌ក្រហមសម្រាប់ពាក្យ folio. */
+}
+
+.nav-links {
+    display: flex;                /* តម្រៀបបញ្ជី Menu ជាជួរដេក */
+    list-style: none;             /* លុបចំណុចមូលដើម */
+    gap: 30px;                    /* គម្លាតរវាង Menu 30px */
+}
+
+.nav-links a {
+    color: var(--text-gray);      /* ពណ៌ប្រផេះស្រាល */
+    text-decoration: none;        /* លុបបន្ទាត់ពីក្រោម */
+    font-size: 14px;              /* ទំហំអក្សរ 14px */
+    font-weight: 500;             /* កម្រាស់មធ្យម */
+    transition: color 0.3s;       /* ល្បឿនប្តូរពណ៌ */
+}
+
+.nav-links a:hover,
+.nav-links a.active {             /* រំលេចពណ៌ក្រហមសម្រាប់ទំព័រដែលកំពុងបើក (active) */
+    color: var(--primary-red);
+}
+
+/* ==========================================================================
+   ៤. ផ្នែកដំបូង (HERO SECTION - HOME PAGE)
+   ========================================================================== */
+.hero {
+    padding: 60px 0 80px;         /* គម្លាតខាងក្នុង */
+    background: radial-gradient(circle at 80% 30%, rgba(241, 39, 17, 0.15), transparent 50%);
+}
+
+.hero-container {
+    display: grid;                /* បើកមុខងារ Grid */
+    grid-template-columns: 1.1fr 0.9fr; /* ចែកជា ២ ជួរឈរ */
+    align-items: center;          /* តម្រឹមកណ្តាលតាមទិសឈរ */
+    gap: 40px;                    /* គម្លាត 40px */
+}
+
+.hero-content h1 {
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.typing-text {
+    font-size: 48px;
+    font-weight: 800;
+    color: var(--primary-red);
+    margin-bottom: 15px;
+}
+
+.cursor {
+    color: var(--text-white);
+    animation: blink 1s infinite; /* ភ្ជាប់ចលនាលោតភ្លឹបភ្លែត */
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.hero-content p {
+    color: var(--text-gray);
+    font-size: 15px;
+    max-width: 450px;
+    margin-bottom: 30px;
+}
+
+.hero-buttons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.status-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-gray);
+}
+
+.status-badge .dot {
+    width: 8px;
+    height: 8px;
+    background-color: #2ecc71;    /* ចំណុចពណ៌បៃតង */
+    border-radius: 50%;
+}
+
+.hero-image {
+    position: relative;           /* កំណត់ជាប្រអប់មេសម្រាប់ប្រអប់អណ្តែត */
+    display: flex;
+    justify-content: center;
+}
+
+.hero-image img {
+    width: 100%;
+    max-width: 380px;
+    border-radius: 20px;
+    object-fit: cover;            /* តម្រូវរូបភាពឱ្យពេញប្រអប់ស្អាត */
+}
+
+.floating-card {
+    position: absolute;           /* ធ្វើឱ្យប្រអប់អណ្តែតលើរូបភាព */
+    background-color: var(--text-white);
+    color: #111;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.badge-top {
+    top: 20px;
+    right: 10px;
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.badge-icon {
+    width: 36px;
+    height: 36px;
+    background-color: rgba(241, 39, 17, 0.1);
+    color: var(--primary-red);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.badge-text strong {
+    display: block;
+    font-size: 13px;
+    line-height: 1.2;
+}
+
+.badge-text span {
+    font-size: 11px;
+    color: #666;
+}
+
+.badge-bottom {
+    bottom: 20px;
+    left: 10px;
+    padding: 18px 20px;
+    text-align: center;
+    width: 150px;
+}
+
+.badge-icon-circle {
+    width: 36px;
+    height: 36px;
+    background-color: var(--primary-red);
+    color: var(--text-white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 8px;
+}
+
+.badge-bottom h3 {
+    font-size: 26px;
+    font-weight: 800;
+    line-height: 1.1;
+}
+
+.badge-bottom p {
+    font-size: 11px;
+    color: #666;
+    margin-top: 4px;
+}
+
+/* ==========================================================================
+   ៥. ផ្នែកអំពីខ្ញុំ (ABOUT SECTION)
+   ========================================================================== */
+.about {
+    background-color: var(--bg-secondary);
+    padding: 90px 0;
+}
+
+.about-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* បែងចែកជា ២ ជួរឈរស្មើគ្នា */
+    gap: 50px;
+    align-items: center;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* បង្កើតក្រឡា 2x2 */
+    gap: 20px;
+}
+
+.grid-img img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 16px;
+    display: block;
+}
+
+.stat-box {
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    height: 180px;
+    display: flex;
+    flex-direction: column;       /* តម្រៀបតួលេខ និងអក្សរពីលើចុះក្រោម */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.stat-box h3 {
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--text-white);
+}
+
+.stat-box p {
+    font-size: 12px;
+    color: var(--primary-red);
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-top: 5px;
+}
+
+.about-content h2 {
+    font-size: 34px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.about-desc {
+    color: var(--text-gray);
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+.personal-info {
+    list-style: none;
+    margin-bottom: 30px;
+}
+
+.personal-info li {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: var(--text-gray);
+    margin-bottom: 10px;
+}
+
+.personal-info strong {
+    color: var(--text-white);
+    margin-right: 6px;
+}
+
+.personal-info .bullet {
+    width: 8px;
+    height: 8px;
+    background-color: var(--primary-red);
+    border-radius: 50%;
+    margin-right: 12px;
+    display: inline-block;
+}
+
+.about-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* ==========================================================================
+   ៦. ផ្នែកសេវាកម្ម (SERVICES SECTION)
+   ========================================================================== */
+.services {
+    padding: 90px 0;
+    background: radial-gradient(circle at 20% 70%, rgba(241, 39, 17, 0.12), transparent 50%);
+}
+
+.services-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 60px;
+}
+
+.services-header h2 {
+    font-size: 34px;
+    font-weight: 700;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* ក្រឡា ៣ ជួរឈរ */
+    gap: 45px 25px;
+}
+
+.service-card {
+    background-color: var(--card-bg);
+    padding: 45px 25px 30px;
+    border-radius: 16px;
+    text-align: center;
+    position: relative;           /* ប្រអប់មេសម្រាប់រង្វង់ Icon */
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);  /* ហោះឡើងលើ 5px ពេលដាក់ Mouse ពីលើ */
+}
+
+.service-icon {
+    width: 56px;
+    height: 56px;
+    background-color: var(--text-white);
+    color: var(--primary-red);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    position: absolute;           /* អណ្តែតនៅគែមខាងលើកាត */
+    top: -28px;
+    left: 50%;
+    transform: translateX(-50%);  /* តម្រឹមចំកណ្តាលឥតខ្ចោះ */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.service-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.service-card p {
+    color: var(--text-gray);
+    font-size: 13px;
+    margin-bottom: 22px;
+}
+
+/* ==========================================================================
+   ៧. ផ្នែកស្នាដៃ (PORTFOLIO PAGE)
+   ========================================================================== */
+.portfolio-section {
+    padding: 70px 0 90px;
+}
+
+.filter-buttons {
+    display: flex;                /* តម្រៀបប៊ូតុងជ្រើសរើសប្រភេទការងារជាជួរដេក */
+    justify-content: center;      /* ដាក់នៅកណ្តាល */
+    flex-wrap: wrap;              /* ចុះបន្ទាត់ស្វ័យប្រវត្តិពេលអេក្រង់តូច */
+    gap: 12px;
+    margin-bottom: 40px;
+}
+
+.filter-btn {
+    padding: 8px 20px;
+    background-color: var(--card-bg);
+    color: var(--text-gray);
+    border-radius: 30px;
+    font-size: 13px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background-color: var(--primary-red);
+    color: var(--text-white);
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* ក្រឡា ៣ ជួរឈរ */
+    gap: 25px;
+}
+
+.portfolio-card {
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    overflow: hidden;             /* កាត់ផ្នែករូបភាពដែលលយចេញក្រៅជ្រុងកោង */
+    transition: transform 0.3s ease;
+}
+
+.portfolio-card:hover {
+    transform: translateY(-6px);
+}
+
+.portfolio-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+
+.portfolio-info {
+    padding: 20px;
+}
+
+.portfolio-category {
+    color: var(--primary-red);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.portfolio-info h3 {
+    font-size: 18px;
+    margin: 6px 0 12px;
+}
+
+/* ==========================================================================
+   ៨. ផ្នែកអត្ថបទ (BLOG PAGE)
+   ========================================================================== */
+.blog-section {
+    padding: 70px 0 90px;
+}
+
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* ក្រឡា ៣ ជួរឈរ */
+    gap: 25px;
+}
+
+.blog-card {
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;       /* រៀបរូបភាព និងអត្ថបទពីលើចុះក្រោម */
+}
+
+.blog-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.blog-content {
+    padding: 22px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.blog-meta {
+    display: flex;
+    gap: 15px;
+    font-size: 12px;
+    color: var(--primary-red);
+    margin-bottom: 10px;
+}
+
+.blog-content h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.blog-content p {
+    color: var(--text-gray);
+    font-size: 13px;
+    margin-bottom: 20px;
+    flex: 1;
+}
+
+.read-more {
+    color: var(--text-white);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.3s;
+}
+
+.read-more:hover {
+    color: var(--primary-red);
+}
+
+/* ==========================================================================
+   ៩. ផ្នែកទំនាក់ទំនង (CONTACT PAGE)
+   ========================================================================== */
+.contact-section {
+    padding: 70px 0 90px;
+}
+
+.contact-container {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr; /* ខាងឆ្វេងព័ត៌មានទំនាក់ទំនង ខាងស្តាំប្រអប់ផ្ញើសារ */
+    gap: 40px;
+}
+
+.contact-info-box {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.info-card {
+    background-color: var(--card-bg);
+    padding: 22px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.info-icon {
+    width: 50px;
+    height: 50px;
+    background-color: var(--primary-red);
+    color: var(--text-white);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;                /* ការពារកុំឱ្យប្រអប់ Icon រួមតូចពេលអក្សរវែង */
+}
+
+.info-card h4 {
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+.info-card p {
+    color: var(--text-gray);
+    font-size: 13px;
+}
+
+.contact-form {
+    background-color: var(--card-bg);
+    padding: 35px;
+    border-radius: 16px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* ដាក់ប្រអប់ឈ្មោះ និងអ៊ីមែលទន្ទឹមគ្នា */
+    gap: 15px;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 13px;
+    margin-bottom: 6px;
+    color: var(--text-gray);
+}
+
+.form-control {
+    width: 100%;                  /* ឱ្យប្រអប់បញ្ចូលអក្សររីកពេញទទឹង */
+    padding: 12px 16px;
+    background-color: var(--bg-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    color: var(--text-white);
+    font-size: 14px;
+    outline: none;                /* លុបស៊ុមពណ៌ខៀវដើមពេលចុចសរសេរ */
+    transition: border-color 0.3s;
+}
+
+.form-control:focus {             /* ប្តូរពណ៌ស៊ុមពេលចុចចូលសរសេរ */
+    border-color: var(--primary-red);
+}
+
+textarea.form-control {
+    resize: vertical;             /* អនុញ្ញាតឱ្យទាញពង្រីកប្រអប់សារបានតែតាមទិសឈរ */
+    min-height: 120px;
+}
+
+/* ==========================================================================
+   ១០. ផ្នែកបាតគេហទំព័រ (FOOTER)
+   ========================================================================== */
+footer {
+    background-color: var(--bg-secondary);
+    padding: 30px 0;
+    border-top: 1px solid var(--border-color);
+    margin-top: auto;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.footer-container p {
+    color: var(--text-gray);
+    font-size: 13px;
+}
+
+.social-links {
+    display: flex;
+    gap: 12px;
+}
+
+.social-links a {
+    width: 36px;
+    height: 36px;
+    background-color: var(--card-bg);
+    color: var(--text-white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.social-links a:hover {
+    background-color: var(--primary-red);
+}
+
+/* ==========================================================================
+   ១១. ការបត់បែនតាមទំហំអេក្រង់ (RESPONSIVE DESIGN)
+   ========================================================================== */
+@media (max-width: 992px) {       /* អនុវត្តពេលអេក្រង់តូចជាង ឬស្មើ 992px (Tablet) */
+    .hero-container,
+    .about-container,
+    .contact-container {
+        grid-template-columns: 1fr; /* ប្តូរមក ១ ជួរឈរ */
+    }
+
+    .hero-content,
+    .about-content {
+        text-align: center;
+    }
+
+    .hero-content p {
+        margin: 0 auto 30px;
+    }
+
+    .hero-buttons,
+    .about-actions,
+    .personal-info li {
+        justify-content: center;
+    }
+
+    .services-grid,
+    .portfolio-grid,
+    .blog-grid {
+        grid-template-columns: repeat(2, 1fr); /* ប្តូរមក ២ ជួរឈរ */
+    }
+}
+
+@media (max-width: 600px) {       /* អនុវត្តពេលអេក្រង់តូចជាង ឬស្មើ 600px (ទូរស័ព្ទ) */
+    .nav-links {
+        gap: 14px;
+        font-size: 12px;
+    }
+    
+    .nav-container {
+        flex-direction: column;   /* តម្រៀប Logo, Menu, ប៊ូតុង ពីលើចុះក្រោមលើទូរស័ព្ទ */
+        gap: 15px;
+    }
+
+    .hero-content h1,
+    .typing-text {
+        font-size: 36px;
+    }
+
+    .services-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .services-grid,
+    .portfolio-grid,
+    .blog-grid,
+    .form-row {
+        grid-template-columns: 1fr; /* ប្តូរមក ១ ជួរឈរពេញអេក្រង់ */
+    }
+
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+}
